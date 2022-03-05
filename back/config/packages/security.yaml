@@ -4,16 +4,24 @@ security:
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+
+    encoders:
+        App\Entity\Users:
+            algorithm: bcrypt
+
     providers:
-        users_in_memory: { memory: null }
+        app_user_provider:
+            entity:
+                class: App\Entity\Users
+                property: email
     firewalls:
     
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            lazy: true
-            provider: users_in_memory
+            #lazy: true
+            #provider: users_in_memory
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -32,18 +40,18 @@ security:
         api:
             pattern:   ^/api
             stateless: true
-            jwt: ~
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
 
-    #access_control:
+    access_control:
      #   - { path: ^/api/login, roles: PUBLIC_ACCESS }
-      #  - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/fffff,       roles: IS_AUTHENTICATED_FULLY }
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
-    access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
-
+    
 when@test:
     security:
         password_hashers:
