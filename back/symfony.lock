@@ -91,6 +91,9 @@
     "doctrine/sql-formatter": {
         "version": "1.1.2"
     },
+    "fakerphp/faker": {
+        "version": "v1.19.0"
+    },
     "fig/link-util": {
         "version": "1.1.2"
     },
@@ -132,6 +135,9 @@
         "files": [
             "./config/packages/nelmio_cors.yaml"
         ]
+    },
+    "pelmered/fake-car": {
+        "version": "1.7"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
