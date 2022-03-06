@@ -19,6 +19,7 @@ const Home = () => {
         <div className="home">
             <Navigation/>
             <div className="container">
+                <h2 className='text-center'>Liste des voitures</h2>
                 <ul>
                     {carsData.map((car) => <Cars key={car.id} car={car} />)}
                 </ul>

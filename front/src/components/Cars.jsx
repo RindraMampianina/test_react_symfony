@@ -20,17 +20,33 @@ const Cars = ({car}) => {
     const handleSubmit = (e) =>{
         e.preventDefault()
 
+        const token = localStorage.getItem("token")
+
+
+        const user = localStorage.getItem("user")
         
-        axios.post("http://127.0.0.1:8000/api/comments", {
-            "comment": commentData,
-            "car": car["@id"],
-            "userInfo": '/api/users/6'
-        }).then((res) =>{
-            if(res.statusText =='Created')
+        const userApi = `/api/users/${user}`
+        if(token){
+
+            if(commentData != null && commentData != '')
             {
-                getData()
+                axios.post("http://127.0.0.1:8000/api/comments", {
+                    "comment": commentData,
+                    "car": car["@id"],
+                    "userInfo" : userApi
+                },{
+                    headers: {"Authorization" : `Bearer ${token}`}
+                }).then((res) =>{
+                    if(res.statusText =='Created')
+                    {
+                        getData()
+                    }
+                })
             }
-        })
+        }
+        else {
+            navigate(`/login`);
+        }
     }
 
   

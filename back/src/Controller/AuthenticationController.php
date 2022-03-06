@@ -38,10 +38,12 @@ use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
             {
                 $token = $JWTManager->create($user);
             }
+            return new JsonResponse(['token' => $token, 'user' => $user->getId()]);
         }
 
+        return new JsonResponse(['token' => null]);
+
         
-        return new JsonResponse(['token' => $token]);
 
     }
 

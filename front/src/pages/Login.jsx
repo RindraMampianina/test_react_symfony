@@ -23,10 +23,9 @@ const Login = () => {
                 "password": pass,
             }).then(async (res) =>{
                 if(res.data.token){
-                    await localStorage.setItem("token", res.data.token);
-                    
-                    navigate(`/`);
-                    
+                    await localStorage.setItem("token", res.data.token)
+                    await localStorage.setItem("user", res.data.user)
+                    navigate('/')
                 }
                 else {
                     setmessage('Login ou mot de passe incorrect.');

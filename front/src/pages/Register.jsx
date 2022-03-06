@@ -7,6 +7,9 @@ const Register = () => {
     const [email, setEmail] = useState([])
     const [pass, setPass] = useState([])
 
+    const [showRegisterMessage, setShowRegisterMessage] = useState(false);
+    const [message, setmessage] = useState("");
+
     const navigate = useNavigate()
 
 
@@ -17,11 +20,17 @@ const Register = () => {
             "email": email,
             "password": pass,
         }).then((res) =>{
+            setShowRegisterMessage(true)
+            setmessage("Inscription éfféctué avec succès")
             if(res.status == 201 || res.status == 200)
             {
                 navigate('/login')
             }
-        })
+        }).catch(error => {
+            
+            console.log(error);
+            
+        });
     }
 
     return(
@@ -30,6 +39,15 @@ const Register = () => {
 
             <div className="d-flex justify-content-center">
                 <div className="col-md-4">
+
+                    {
+                        showRegisterMessage ? 
+                        <div className="alert alert-success">
+                            {message}
+                        </div>
+                        : null
+                    }
+
                     <h2 className='mb-3 text-center'>S'inscrire</h2>
                     <form onSubmit={(e) => handleSubmit(e) }>
 
