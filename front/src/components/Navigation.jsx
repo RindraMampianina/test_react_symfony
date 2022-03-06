@@ -22,12 +22,12 @@ const Navigation = () => {
                 :
 
                 <div className="nav">
-                    <NavLink to="/login">
-                        Se connecter
-                    </NavLink>
-
                     <NavLink to="/register">
                         S'inscrire
+                    </NavLink>
+                    
+                    <NavLink to="/login">
+                        Se connecter
                     </NavLink>
                 </div>
             }
