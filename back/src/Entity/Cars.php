@@ -2,14 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\CarsRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CarsRepository;
+use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      normalizationContext = {"groups" = {"carInfo"}},
+ * )
  * @ORM\Entity(repositoryClass=CarsRepository::class)
  */
 class Cars
@@ -18,21 +21,25 @@ class Cars
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"carInfo"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"carInfo"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"carInfo"})
      */
     private $brand;
 
     /**
      * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="car")
+     * @Groups({"carInfo"})
      */
     private $comments;
 

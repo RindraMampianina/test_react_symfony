@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\CommentsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CommentsRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
@@ -17,11 +18,13 @@ class Comments
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"carInfo"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"carInfo"})
      */
     private $comment;
 
@@ -32,6 +35,7 @@ class Comments
 
     /**
      * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="comments")
+     * @Groups({"carInfo"})
      */
     private $userInfo;
 
